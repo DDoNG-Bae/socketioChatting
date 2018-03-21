@@ -45,7 +45,7 @@ public class MessageAdepter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Message message = messages.get(position);
         viewHolder.setMessage(message.getMessage());
-        viewHolder.setUsername(message.getUsername());
+        viewHolder.setUsername(message.getUsername(),usernameColor);
     }
 
     @Override
