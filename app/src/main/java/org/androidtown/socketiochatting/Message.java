@@ -14,7 +14,7 @@ public class Message {
     private String mMessage;
     private String mUsername;
 
-    public Message(){}
+    private Message(){}
 
     public int getType() {
         return mType;
@@ -28,7 +28,7 @@ public class Message {
         return mUsername;
     }
 
-    public class Builder {
+    public static class Builder {
         private final int mType;
         private String mUsername;
         private String mMessage;
