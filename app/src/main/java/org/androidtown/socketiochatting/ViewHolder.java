@@ -11,28 +11,13 @@ import android.widget.TextView;
 public class ViewHolder extends RecyclerView.ViewHolder {
     private TextView usernameView;
     private TextView messageView;
-
-    public ViewHolder(View itemView) {
+    private int[] usernameColor;
+    public ViewHolder(View itemView,int[] usernameColor) {
         super(itemView);
 
+        this.usernameColor = usernameColor;
         usernameView = (TextView)itemView.findViewById(R.id.username);
         messageView = (TextView)itemView.findViewById(R.id.message);
-    }
-
-    public TextView getUsernameView() {
-        return usernameView;
-    }
-
-    public void setUsernameView(TextView usernameView) {
-        this.usernameView = usernameView;
-    }
-
-    public TextView getMessageView() {
-        return messageView;
-    }
-
-    public void setMessageView(TextView messageView) {
-        this.messageView = messageView;
     }
 
     public void setMessage(String message){
@@ -40,13 +25,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         messageView.setText(message);
     }
 
-    public void setUsername(String username,int[] usernameColor){
+    public void setUsername(String username){
         if(usernameView==null) return;
         usernameView.setText(username);
-        usernameView.setTextColor(getUsernameColor(username,usernameColor));
+        usernameView.setTextColor(getUsernameColor(username));
     }
 
-    private int getUsernameColor(String username , int[] usernameColor){
+    private int getUsernameColor(String username){
         int hash = 7;
         for(int i = 0,len = username.length(); i<len;i++){
             hash = username.codePointAt(i)+(hash<<5)-hash;

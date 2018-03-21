@@ -50,8 +50,8 @@ public class Message {
         public Message build() {
             Message message = new Message();
             message.mType=mType;
-            message.mMessage=mUsername;
-            message.mUsername=mMessage;
+            message.mMessage=mMessage;
+            message.mUsername=mUsername;
             return message;
         }
     }

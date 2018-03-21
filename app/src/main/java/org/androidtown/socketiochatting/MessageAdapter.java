@@ -12,12 +12,12 @@ import java.util.List;
  * Created by DASOM on 2018-03-21.
  */
 
-public class MessageAdepter extends RecyclerView.Adapter<ViewHolder> {
+public class MessageAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Message> messages;
     private int[] usernameColor;
 
-    public MessageAdepter(Context context,List<Message> messages) {
+    public MessageAdapter(Context context, List<Message> messages) {
         this.messages = messages;
         usernameColor = context.getResources().getIntArray(R.array.username_colors);
     }
@@ -38,18 +38,23 @@ public class MessageAdepter extends RecyclerView.Adapter<ViewHolder> {
         }
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v,usernameColor);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Message message = messages.get(position);
         viewHolder.setMessage(message.getMessage());
-        viewHolder.setUsername(message.getUsername(),usernameColor);
+        viewHolder.setUsername(message.getUsername());
     }
 
     @Override
     public int getItemCount() {
         return messages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return messages.get(position).getType();
     }
 }

@@ -143,7 +143,7 @@ public class MainFragment extends Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mAdapter = new MessageAdepter(context,mMessages);
+        mAdapter = new MessageAdapter(context,mMessages);
     }
 
     @Override
@@ -177,6 +177,7 @@ public class MainFragment extends Fragment{
                         if(mUsername!=null)
                             mSocket.emit("add user", mUsername);
                         Toast.makeText(getActivity().getApplicationContext(),R.string.connect,Toast.LENGTH_LONG);
+                        isConnected = true;
                     }
                 }
             });
@@ -289,13 +290,6 @@ public class MainFragment extends Fragment{
         }
     };
 
-
-    private void addLog(String message){
-        mMessages.add(new Message.Builder(Message.TYPE_LOG).message(message).build());
-        mAdapter.notifyItemInserted(mMessages.size()-1);
-        scrollToBottom();
-    }
-
     private Emitter.Listener onTyping = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -346,6 +340,12 @@ public class MainFragment extends Fragment{
         }
     };
 
+    private void addLog(String message){
+        mMessages.add(new Message.Builder(Message.TYPE_LOG).message(message).build());
+        mAdapter.notifyItemInserted(mMessages.size()-1);
+        scrollToBottom();
+    }
+
     private void addParticipantsLog(int numUsers){
         addLog(getResources().getQuantityString(R.plurals.message_participants,numUsers,numUsers));
     }
@@ -357,8 +357,7 @@ public class MainFragment extends Fragment{
     }
 
     private void addTyping(String username) {
-        mMessages.add(new Message.Builder(Message.TYPE_ACTION)
-                .username(username).build());
+        mMessages.add(new Message.Builder(Message.TYPE_ACTION).username(username).build());
         mAdapter.notifyItemInserted(mMessages.size() - 1);
         scrollToBottom();
     }
@@ -421,8 +420,5 @@ public class MainFragment extends Fragment{
     private void scrollToBottom(){
         mMessagesView.scrollToPosition(mAdapter.getItemCount()-1);
     }
-
-
-
 
 }
