@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         ChatApplication app = (ChatApplication)getApplication();
         mSocket=app.getSocket();
 
