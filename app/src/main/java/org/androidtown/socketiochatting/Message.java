@@ -14,7 +14,7 @@ public class Message {
     private String mMessage;
     private String mUsername;
 
-    private Message(){}
+    public Message(){}
 
     public int getType() {
         return mType;
@@ -28,5 +28,31 @@ public class Message {
         return mUsername;
     }
 
+    public class Builder {
+        private final int mType;
+        private String mUsername;
+        private String mMessage;
 
+        public Builder(int type) {
+            mType = type;
+        }
+
+        public Builder username(String username) {
+            mUsername = username;
+            return this;
+        }
+
+        public Builder message(String message) {
+            mMessage = message;
+            return this;
+        }
+
+        public Message build() {
+            Message message = new Message();
+            message.mType=mType;
+            message.mMessage=mUsername;
+            message.mUsername=mMessage;
+            return message;
+        }
+    }
 }
